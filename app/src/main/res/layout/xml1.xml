@@ -29,7 +29,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/addpeopleblue" />
+            android:src="@drawable/baseline_image_24" />
 
         <!-- Campo de entrada para el título -->
         <EditText
@@ -37,7 +37,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="1"
             android:hint="Título" />
 
         <!-- Campo de entrada para la descripción -->

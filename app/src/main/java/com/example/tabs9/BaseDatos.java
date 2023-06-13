@@ -6,25 +6,23 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class BaseDatos  extends SQLiteOpenHelper {
+public class BaseDatos extends SQLiteOpenHelper {
 
-    String crear = "Create table cliente(id integer primary key autoincrement, nombre text)";
+    String crear = "CREATE TABLE cliente(id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, descripcion TEXT, imagen BLOB)";
 
-    public BaseDatos(Context context, String name,  SQLiteDatabase.CursorFactory factory, int version) {
+    public BaseDatos(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(crear);
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("Drop table if exists cliente");
+        db.execSQL("DROP TABLE IF EXISTS cliente");
         db.execSQL(crear);
-
-
     }
 }
+

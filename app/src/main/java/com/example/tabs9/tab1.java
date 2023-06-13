@@ -23,10 +23,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 public class tab1 extends Fragment {
     SQLiteDatabase db;
     TextView tv;
     EditText editText;
+    EditText edDescripcion;
     ImageView imgPreview;
 
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -40,9 +45,10 @@ public class tab1 extends Fragment {
 
         tv = view.findViewById(R.id.tv);
         editText = view.findViewById(R.id.edTitulo);
+        edDescripcion = view.findViewById(R.id.edDescripcion);
         imgPreview = view.findViewById(R.id.imgPreview);
 
-        BaseDatos con = new BaseDatos(getActivity(), "Usuarios2", null, 2);
+        BaseDatos con = new BaseDatos(getActivity(), "Usuarios4", null, 4);
         db = con.getWritableDatabase();
 
         Button btnGuardar = view.findViewById(R.id.btnGuardar);
@@ -66,16 +72,43 @@ public class tab1 extends Fragment {
 
     public void guardar() {
         String titulo = editText.getText().toString();
+        String descripcion = edDescripcion.getText().toString();
 
-        if (db != null) {
-            ContentValues valores = new ContentValues();
-            valores.put("nombre", titulo);
-            long id = db.insert("cliente", null, valores);
-            // Aquí puedes utilizar el ID retornado si lo necesitas
+        if (db != null && uri != null) {
+            try {
+                InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
+                byte[] imagen = getBytes(inputStream);
+                inputStream.close();
 
-            // Opcionalmente, puedes limpiar el EditText después de guardar los datos
-            editText.setText("");
+                ContentValues valores = new ContentValues();
+                valores.put("nombre", titulo);
+                valores.put("descripcion", descripcion);
+                valores.put("imagen", imagen);
+                long id = db.insert("cliente", null, valores);
+
+                // Aquí puedes utilizar el ID retornado si lo necesitas
+
+                // Opcionalmente, puedes limpiar los EditText después de guardar los datos
+                editText.setText("");
+                edDescripcion.setText("");
+                imgPreview.setImageBitmap(null);
+                uri = null;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    private byte[] getBytes(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
+        int len;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
+        return byteBuffer.toByteArray();
     }
 
     public void abrirGaleria() {
@@ -85,11 +118,10 @@ public class tab1 extends Fragment {
 
         // Verificar si hay una aplicación disponible para manejar la acción de seleccionar una imagen
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-            // Iniciar la actividad de selección de imagen
+// Iniciar la actividad de selección de imagen
             startActivityForResult(intent, PICK_IMAGE_REQUEST);
         }
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -100,6 +132,7 @@ public class tab1 extends Fragment {
 
             // Establecer la imagen en el ImageView
             imgPreview.setImageURI(imageUri);
+            uri = imageUri;
         }
     }
 
@@ -109,7 +142,6 @@ public class tab1 extends Fragment {
         if (db != null) {
             db.close();
         }
-    }
-}
+    }}
 
 
