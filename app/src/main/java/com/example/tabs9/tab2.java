@@ -36,7 +36,7 @@ public class tab2 extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerView);
 
-        BaseDatos con = new BaseDatos(getActivity(), "Usuarios4", null, 4);
+        BaseDatos con = new BaseDatos(getActivity(), "Usuarios6", null, 6);
         db = con.getWritableDatabase();
 
         // Obtener los datos de la tabla cliente
@@ -59,6 +59,7 @@ public class tab2 extends Fragment {
                 Cliente cliente = new Cliente(id, nombre, descripcion, bytesImagen);
                 clienteList.add(cliente);
 
+
             } while (c.moveToNext());
         }
 
@@ -66,7 +67,7 @@ public class tab2 extends Fragment {
 
         // Configurar el RecyclerView y el adaptador
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new CustomAdapter(getActivity(), clienteList);
+        adapter = new CustomAdapter(getActivity(), clienteList, false); // Pasar false para no mostrar el botón de edición
         recyclerView.setAdapter(adapter);
 
         return view;

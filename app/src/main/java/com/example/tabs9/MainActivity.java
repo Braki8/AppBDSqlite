@@ -32,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
+
+        int[] iconos = {R.drawable.baseline_note_add_24, R.drawable.note_list, R.drawable.baseline_edit_note_24};
+
+        for (int i = 0; i < 3 ; i++) {
+            tabs.getTabAt(i).setIcon(iconos[i]);
+        }
+
         /*FloatingActionButton fab = binding.fab;
 
         fab.setOnClickListener(new View.OnClickListener() {

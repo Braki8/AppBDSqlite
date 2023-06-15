@@ -43,12 +43,12 @@ public class tab1 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.xml1, container, false);
 
-        tv = view.findViewById(R.id.tv);
+
         editText = view.findViewById(R.id.edTitulo);
         edDescripcion = view.findViewById(R.id.edDescripcion);
         imgPreview = view.findViewById(R.id.imgPreview);
 
-        BaseDatos con = new BaseDatos(getActivity(), "Usuarios4", null, 4);
+        BaseDatos con = new BaseDatos(getActivity(), "Usuarios6", null, 6);
         db = con.getWritableDatabase();
 
         Button btnGuardar = view.findViewById(R.id.btnGuardar);

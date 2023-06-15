@@ -12,7 +12,6 @@ import com.example.tabs9.R;
 import com.example.tabs9.tab1;
 import com.example.tabs9.tab2;
 import com.example.tabs9.tab3;
-import com.example.tabs9.tab4;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -21,7 +20,7 @@ import com.example.tabs9.tab4;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2,R.string.tab_text_3, R.string.tab_text_4};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2,R.string.tab_text_3};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -44,9 +43,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             case 2:
                 tab3 tab3c = new tab3();
                 return tab3c;
-            case 3:
-                tab4 tab4c = new tab4();
-                return tab4c;
 
 
 
@@ -59,12 +55,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return mContext.getResources().getString(TAB_TITLES[position]);
+        //return mContext.getResources().getString(TAB_TITLES[position]);
+        return null;
     }
 
     @Override
     public int getCount() {
         // Show 2 total pages.
-        return 4;
+        return 3;
     }
 }
