@@ -1,2 +1,8 @@
-# AppBDSqlite
-En esta version solo puedo insertar texto desde mi tab principal y verlos en mi segunto tab, el id es de aute incremento
+# AppBD-Sqlite
+Con esta aplicacion puedo agregar una imagen desde el almacenamienot de mi telefono medianto un boton, agregarle un titulo, y una descripcion para luego se guardadas en mi base de datos llamada Usuario6 que 
+esta creada con SQLise de android studio.
+La app en mi segunda pestaña muestra una lista con los datos que cargue a la base de datos en donde puedo visualizar una pequeña imagen segun la que agregue, el titulo y la descripcion correspondiente
+Para el tercer tab, puedo editar o actualizar la imagen, titulo o descipcion de mi datos, esto gracias a un boton editar que aparece junto a la fila de cada nota que este en la lista, y esta al momento de
+seleccionarla pues me redirecciona a un layout en donde pues aparecen las opciones de que es lo que quiero editar en mi nota o si simplemente quiero eliminarla.
+
+Ya para la parte de la base de datos Implementé el NoteDatabaseHelper, una clase que extendía SQLiteOpenHelper. Definí la estructura de la tabla de notas en el método onCreate(), e implementé el método onUpgrade() para futuras actualizaciones. Dentro de la clase, agregué métodos para realizar operaciones CRUD, como insertar una nueva nota, obtener todas las notas, actualizar una nota existente y eliminar una nota. En mi actividad principal, utilicé la instancia de NoteDatabaseHelper para interactuar con la base de datos SQLite. permití a los usuarios editar las notas en una actividad separada. Al guardar los cambios, actualicé la nota llamando al método updateNote(). En resumen, el NoteDatabaseHelper me permitió gestionar eficientemente las operaciones de base de datos en mi aplicación de notas.
